@@ -1,4 +1,3 @@
-//your JS code here. If required.
 document.addEventListener('DOMContentLoaded', function() {
     const bands = [
         'The Plot in You', 
@@ -16,18 +15,23 @@ document.addEventListener('DOMContentLoaded', function() {
         'An Old Dog'
     ];
 
-    // Function to strip articles for sorting
+    // Improved function to strip articles
     function stripArticles(name) {
         return name.replace(/^(a |an |the )/i, '').trim();
     }
 
-    // Sort the bands array
+    // Sort the bands array properly
     const sortedBands = bands.sort((a, b) => {
-        return stripArticles(a) > stripArticles(b) ? 1 : -1;
+        const nameA = stripArticles(a).toLowerCase();
+        const nameB = stripArticles(b).toLowerCase();
+        return nameA.localeCompare(nameB);
     });
 
     // Get the ul element
     const bandList = document.getElementById('band');
+
+    // Clear any existing content
+    bandList.innerHTML = '';
 
     // Add each band as a list item
     sortedBands.forEach(band => {
